@@ -1,7 +1,7 @@
 <br>
 
 <div align="center">
-    <img src="src/assets/images/print.png" alt="print Repo" width="100%">
+    <img src="assets/images/print.png" alt="print Repo" width="100%">
     <h1></h1>
     Ferramenta para converter links de FAQs em deeplinks.
 </div>
