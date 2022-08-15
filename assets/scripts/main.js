@@ -24,6 +24,10 @@ function convertDeeplink(type, id) {
 
   switch (type) {
     case "categories":
+      deeplink = `${DlStructure}/category/${id}`;
+      return deeplink;
+
+    case "sections":
       deeplink = `${DlStructure}/section/${id}`;
       return deeplink;
 
