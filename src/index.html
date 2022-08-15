@@ -25,13 +25,18 @@
 
     <main>
         <h1>Conversor de link para sua FAQ</h1>
-        <p>Transforme um link de uma FAQ publicada no <strong>meajuda.picpay.com</strong> em deeplink.</p>
+        <p>Transforme um link de uma FAQ publicada, no <strong>meajuda.picpay.com</strong>, em deeplink.</p>
 
-        <form action="">
+        <form onclick="FaqToDeeplink()">
             <input type="url" name="link" id="faq-link" placeholder="Insira o link da FAQ">
+            <button type="button"><i class="ion-loop"></i></button>
         </form>
-        <button type="submit">Converter para deeplink</button>
+        <div class="feedback">
+            <i class="ion-checkmark-circled"></i>
+            <span>Deeplink convertido e enviado para área de transferência: <strong>CTRL + V para colar</strong>.</span>
+        </div>
     </main>
+
     <script src="assets/scripts/main.js"></script>
 </body>
 
