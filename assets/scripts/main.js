@@ -47,6 +47,9 @@ function toClipboard(deeplink) {
 
 function checkFeedback(deeplink) {
   const cardFeedback = document.querySelector(".feedback");
+  const result = document.querySelector(".deeplink");
+
+  result.innerHTML = deeplink;
 
   deeplink
     ? (cardFeedback.style.display = "flex")
