@@ -21,11 +21,6 @@
 
 O objetivo desta ferramenta e converter uma url padrão de FAQ `meajuda.picpay.com` para um deeplink que seja acessado via app `picpay://picpay/helpcenter/`.
 
-### Features
-
-- [x] Link para deeplink
-- [x] Deeplink para link
-
 ## Como utilizar
 
 1. Insira a URL padrão de clique para converter
