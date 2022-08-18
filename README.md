@@ -1,9 +1,8 @@
 <br>
 
 <div align="center">
-    <img src="assets/images/print.png" alt="print Repo" width="100%">
-    <h1></h1>
-    Ferramenta para converter links de FAQs em deeplinks.
+    <h1>Link to Deeplink</h1>
+    Ferramenta para converter links web em deeplinks.
 </div>
 
 <br>
@@ -19,6 +18,13 @@
 ## Sobre
 
 O objetivo desta ferramenta e converter uma url padrão de FAQ `meajuda.picpay.com` para um deeplink que seja acessado via app `picpay://picpay/helpcenter/`.
+
+### Features
+
+**FAQs**
+
+- [x] Link para deeplink
+- [ ] Deeplink para link
 
 ## Como utilizar
 
