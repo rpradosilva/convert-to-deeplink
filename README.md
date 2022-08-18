@@ -23,10 +23,8 @@ O objetivo desta ferramenta e converter uma url padrão de FAQ `meajuda.picpay.c
 
 ### Features
 
-**FAQs**
-
 - [x] Link para deeplink
-- [ ] Deeplink para link
+- [x] Deeplink para link
 
 ## Como utilizar
 
