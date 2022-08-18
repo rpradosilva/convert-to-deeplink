@@ -1,12 +1,13 @@
 let url, deeplink;
 
-function FaqToDeeplink() {
-  url = document.querySelector("#faq-link").value;
+function convertURL() {
+  url = document.querySelector("#input-url").value;
+  //identify URL - deeplink or link
   const parameters = sanitizeUrl(url);
 
   deeplink = convertDeeplink(parameters.type, parameters.id);
   toClipboard(deeplink);
-  checkFeedback(deeplink);
+  output(deeplink);
 }
 
 function sanitizeUrl(url) {
@@ -45,13 +46,8 @@ function toClipboard(deeplink) {
   navigator.clipboard.writeText(deeplink);
 }
 
-function checkFeedback(deeplink) {
-  const cardFeedback = document.querySelector(".feedback");
-  const result = document.querySelector(".deeplink");
+function output(deeplink) {
+  const placeholder = document.querySelector("#output-url");
 
-  result.innerHTML = deeplink;
-
-  deeplink
-    ? (cardFeedback.style.display = "flex")
-    : (cardFeedback.style.display = "none");
+  deeplink ? (placeholder.value = deeplink) : (placeholder.value = "");
 }

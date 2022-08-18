@@ -3,6 +3,7 @@
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 
 :root {
+  --dark-black: #1b1b1b;
   --black: #252525;
   --gray: #717171;
   --light-gray: #898989;
@@ -27,17 +28,11 @@ body {
   margin: 0 2rem;
 }
 
-header,
 main {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-width: 100%;
-}
-
-svg {
-  width: 380px;
-  height: auto;
+  width: 450px;
   max-width: 100%;
 }
 
@@ -46,21 +41,11 @@ h1 {
   font-weight: 700;
   letter-spacing: -3%;
   line-height: 1.2;
+  margin: 0 0 16px 0;
 }
 
 strong {
   font-weight: 700;
-}
-
-p {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.2;
-}
-
-form {
-  display: flex;
-  margin: 2rem 0 0 0;
 }
 
 i {
@@ -68,77 +53,65 @@ i {
   right: 0;
 }
 
+form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
 input {
-  background: transparent;
-  border: 1px solid var(--light-gray);
-  border-radius: 8px 0 0 8px;
   color: var(--white);
   display: flex;
-  font-size: 16px;
+  font-size: 14px;
   height: 48px;
   line-height: 1.2;
-  padding: 4px 16px;
-  width: 100%;
+  padding: 2px 16px;
+}
+
+input#input-url {
+  background: transparent;
+  border: 2px solid var(--dark-black);
+  border-radius: 8px 8px 0 0;
+}
+
+input#input-url:not(:placeholder-shown) {
+  border-color: var(--dark-green);
+}
+
+input#output-url {
+  background: var(--dark-black);
+  border: 1px solid var(--black);
+  border-radius: 0 0 8px 8px;
+}
+
+input#output-url:not(:placeholder-shown) {
+  background: var(--green);
+}
+
+label {
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 16px 0 8px 4px;
+  opacity: 0.8;
 }
 
 button {
-  background: var(--green);
+  background: var(--dark-black);
   border: 0 transparent;
-  border-radius: 0 8px 8px 0;
+  border-radius: 4px;
   color: var(--white);
   font-size: 24px;
   font-weight: 700;
-  height: 100%;
-  padding: 4px 24px;
-  position: relative;
-  right: 0;
+  padding: 5px 10px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
   transition: 200ms;
+  opacity: 0.6;
 }
 
 button:hover {
   background: var(--dark-green);
   cursor: pointer;
-}
-
-button[disabled] {
-  background: var(--gray);
-  opacity: 0.32;
-}
-
-.feedback {
-  align-items: center;
-  background: var(--white);
-  border-radius: 8px;
-  color: var(--black);
-  display: none;
-  font-size: 14px;
-  gap: 24px;
-  line-height: 1.3;
-  margin: 32px 0 0 0;
-  padding: 16px 24px;
-}
-
-.feedback > i {
-  color: var(--green);
-  font-size: 32px;
-}
-
-.deeplink {
-  background: var(--black);
-  border-radius: 4px;
-  color: var(--white);
-  display: block;
-  padding: 8px 16px 10px 16px;
-  margin: 8px 0 0 0;
-  word-break: break-all;
-}
-
-@media only screen and (max-width: 360px) {
-  .feedback {
-    padding: 16px;
-  }
-
-  .feedback > i {
-    display: none;
-  }
+  opacity: 1;
 }
