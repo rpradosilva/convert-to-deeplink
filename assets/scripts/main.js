@@ -1,53 +1,97 @@
-let url, deeplink;
+let url;
 
-function convertURL() {
+const URLstructure = {
+  FAQ: {
+    APP: "picpay://picpay/helpcenter/",
+    WEB: "https://meajuda.picpay.com",
+  },
+};
+
+function newURL() {
+  url = "";
   url = document.querySelector("#input-url").value;
-  //identify URL - deeplink or link
-  const parameters = sanitizeUrl(url);
+  let URLparameters = specifyURL(url);
 
-  deeplink = convertDeeplink(parameters.type, parameters.id);
-  toClipboard(deeplink);
-  output(deeplink);
+  const URLconverted = convertURL(
+    URLparameters.type,
+    URLparameters.group,
+    URLparameters.id
+  );
+
+  navigator.clipboard.writeText(URLconverted);
+  output(URLconverted);
+
+  // converter para outro formato
 }
 
-function sanitizeUrl(url) {
-  const extractType = JSON.stringify(url.match(/\/[a-z]+[a-z]+\/[0-9]/i));
-  const type = extractType.slice(3, extractType.length - 4);
+function specifyURL(url) {
+  let type, group, id;
 
-  const extractId = JSON.stringify(url.match(/\/[0-9]+-/i));
-  const id = extractId.slice(3, extractId.length - 3);
+  if (url.indexOf(URLstructure.FAQ.WEB) != -1) {
+    const extractGroup = JSON.stringify(url.match(/\/[a-z]+[a-z]+\/[0-9]/i));
+    const extractId = JSON.stringify(url.match(/\/[0-9]+/i));
 
-  return { type, id };
+    type = "faqlink";
+    group = extractGroup.slice(3, extractGroup.length - 4);
+    id = extractId.slice(3, extractId.length - 2);
+  } else if (url.indexOf(URLstructure.FAQ.APP) != -1) {
+    const extractGroup = JSON.stringify(url.match(/\/[a-z]+[a-z]+\/[0-9]/i));
+    const extractId = JSON.stringify(url.match(/\/[0-9]+/i));
+
+    type = "faqdeeplink";
+    group = extractGroup.slice(3, extractGroup.length - 4);
+    id = extractId.slice(3, extractId.length - 2);
+  } else {
+    type = null;
+    group = null;
+    id = null;
+  }
+
+  return { type, group, id };
 }
 
-function convertDeeplink(type, id) {
-  DlStructure = "picpay://picpay/helpcenter";
+function convertURL(type, group, id) {
+  let URLconverted;
 
-  switch (type) {
-    case "categories":
-      deeplink = `${DlStructure}/category/${id}`;
-      return deeplink;
+  switch ((type, group)) {
+    case "faqlink" && "categories":
+      URLconverted = `${URLstructure.FAQ.APP}category/${id}`;
+      return URLconverted;
 
-    case "sections":
-      deeplink = `${DlStructure}/section/${id}`;
-      return deeplink;
+    case "faqlink" && "sections":
+      URLconverted = `${URLstructure.FAQ.APP}section/${id}`;
+      return URLconverted;
 
-    case "articles":
-      deeplink = `${DlStructure}/article/${id}`;
-      return deeplink;
+    case "faqlink" && "articles":
+      URLconverted = `${URLstructure.FAQ.APP}article/${id}`;
+      return URLconverted;
+
+    case "faqdeeplink" && "category":
+      URLconverted = `${URLstructure.FAQ.WEB}/hc/pt-br/categories/${id}`;
+      return URLconverted;
+
+    case "faqdeeplink" && "section":
+      URLconverted = `${URLstructure.FAQ.WEB}/hc/pt-br/sections/${id}`;
+      return URLconverted;
+
+    case "faqdeeplink" && "article":
+      URLconverted = `${URLstructure.FAQ.WEB}/hc/pt-br/articles/${id}`;
+      return URLconverted;
 
     default:
-      deeplink = "";
-      break;
+      return (URLconverted = null);
   }
 }
 
-function toClipboard(deeplink) {
-  navigator.clipboard.writeText(deeplink);
-}
-
-function output(deeplink) {
+function output(URLconverted) {
   const placeholder = document.querySelector("#output-url");
 
-  deeplink ? (placeholder.value = deeplink) : (placeholder.value = "");
+  URLconverted ? (placeholder.value = URLconverted) : (placeholder.value = "");
+}
+
+function changeValues() {
+  document.querySelector("#input-url").value =
+    document.querySelector("#output-url").value;
+
+  newURL();
 }
