@@ -1,6 +1,8 @@
 <br>
 
 <div align="center">
+<img src="assets/images/logo.svg" alt="print Repo" width="120">
+<br>
     <h1>Link to Deeplink</h1>
     Ferramenta para converter links web em deeplinks.
 </div>
@@ -21,7 +23,7 @@ O objetivo desta ferramenta e converter uma url padrão de FAQ `meajuda.picpay.c
 
 ### Features
 
-**FAQs**
+- **FAQs**
 
 - [x] Link para deeplink
 - [ ] Deeplink para link
