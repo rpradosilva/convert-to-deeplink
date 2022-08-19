@@ -54,14 +54,20 @@ function checkURL(type, group) {
   const outputPlaceholder = document.querySelector("#output-url");
   inputPlaceholder.classList.remove("error");
   outputPlaceholder.classList.remove("error");
-  outputPlaceholder.setAttribute("placeholder", "URL Inválida");
+  outputPlaceholder.setAttribute(
+    "placeholder",
+    "Digite uma URL de uma FAQ válida"
+  );
 
   if (type != undefined && group != "") {
     return true;
   } else if ((type, group === null) || group === "") {
     inputPlaceholder.classList.add("error");
     outputPlaceholder.classList.add("error");
-    outputPlaceholder.setAttribute("placeholder", "URL Inválida");
+    outputPlaceholder.setAttribute(
+      "placeholder",
+      "Digite uma URL de uma FAQ válida"
+    );
     return false;
   } else {
     return undefined;
