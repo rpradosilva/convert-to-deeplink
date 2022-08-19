@@ -82,10 +82,25 @@ input#output-url {
   background: var(--dark-black);
   border: 1px solid var(--black);
   border-radius: 0 0 8px 8px;
+  margin: -1px 0 0 0;
 }
 
 input#output-url:not(:placeholder-shown) {
   background: var(--green);
+}
+#input-url.error,
+input#input-url.error:not(:placeholder-shown) {
+  border: 2px solid red;
+}
+
+#output-url.error,
+input#output-url.error:not(:placeholder-shown) {
+  background: red;
+  border: 2px solid red;
+}
+input#output-url.error::placeholder {
+  color: var(--dark-black);
+  font-weight: 700;
 }
 
 label {

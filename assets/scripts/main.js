@@ -8,10 +8,9 @@ const URLstructure = {
 };
 
 function newURL() {
-  url = "";
   url = document.querySelector("#input-url").value;
   let URLparameters = specifyURL(url);
-
+  const isValidURL = checkURL(URLparameters.type, URLparameters.group);
   const URLconverted = convertURL(
     URLparameters.type,
     URLparameters.group,
@@ -20,34 +19,53 @@ function newURL() {
 
   navigator.clipboard.writeText(URLconverted);
   output(URLconverted);
-
-  // converter para outro formato
 }
 
 function specifyURL(url) {
   let type, group, id;
 
-  if (url.indexOf(URLstructure.FAQ.WEB) != -1) {
-    const extractGroup = JSON.stringify(url.match(/\/[a-z]+[a-z]+\/[0-9]/i));
-    const extractId = JSON.stringify(url.match(/\/[0-9]+/i));
+  if (url != "") {
+    if (url.indexOf(URLstructure.FAQ.WEB) != -1) {
+      const extractGroup = JSON.stringify(url.match(/\/[a-z]+[a-z]+\/[0-9]/i));
+      const extractId = JSON.stringify(url.match(/\/[0-9]+/i));
 
-    type = "faqlink";
-    group = extractGroup.slice(3, extractGroup.length - 4);
-    id = extractId.slice(3, extractId.length - 2);
-  } else if (url.indexOf(URLstructure.FAQ.APP) != -1) {
-    const extractGroup = JSON.stringify(url.match(/\/[a-z]+[a-z]+\/[0-9]/i));
-    const extractId = JSON.stringify(url.match(/\/[0-9]+/i));
+      type = "faqlink";
+      group = extractGroup.slice(3, extractGroup.length - 4);
+      id = extractId.slice(3, extractId.length - 2);
+    } else if (url.indexOf(URLstructure.FAQ.APP) != -1) {
+      const extractGroup = JSON.stringify(url.match(/\/[a-z]+[a-z]+\/[0-9]/i));
+      const extractId = JSON.stringify(url.match(/\/[0-9]+/i));
 
-    type = "faqdeeplink";
-    group = extractGroup.slice(3, extractGroup.length - 4);
-    id = extractId.slice(3, extractId.length - 2);
-  } else {
-    type = null;
-    group = null;
-    id = null;
+      type = "faqdeeplink";
+      group = extractGroup.slice(3, extractGroup.length - 4);
+      id = extractId.slice(3, extractId.length - 2);
+    } else {
+      type = null;
+      group = null;
+      id = null;
+    }
   }
 
   return { type, group, id };
+}
+
+function checkURL(type, group) {
+  const inputPlaceholder = document.querySelector("#input-url");
+  const outputPlaceholder = document.querySelector("#output-url");
+  inputPlaceholder.classList.remove("error");
+  outputPlaceholder.classList.remove("error");
+  outputPlaceholder.setAttribute("placeholder", "URL Inválida");
+
+  if (type != undefined && group != "") {
+    return true;
+  } else if ((type, group === null) || group === "") {
+    inputPlaceholder.classList.add("error");
+    outputPlaceholder.classList.add("error");
+    outputPlaceholder.setAttribute("placeholder", "URL Inválida");
+    return false;
+  } else {
+    return undefined;
+  }
 }
 
 function convertURL(type, group, id) {
