@@ -18,11 +18,17 @@
         <form>
             <input type="url" name="link" id="input-url"
                 placeholder="https://meajuda.picpay.com/hc/pt-br/articles/000000" onkeyup="newURL()">
-            <input type="url" name="link" id="output-url" placeholder="URL convertida..">
+
+            <div class="result">
+                <input type="url" name="link" id="output-url" placeholder="URL convertida.." onclick="toClipboard()">
+                <i class="ion-ios-copy-outline"></i>
+            </div>
+
             <label for="fname"><strong>Dica</strong>: após inserir o link, ele será convertido e é só colar <strong>CTRL
                     +
                     V</strong></label>
-            <button type="button" onclick="changeValues()"><i class="ion-arrow-swap"></i></button>
+            <button type="button" id="button-change" onclick="changeValues()"><i class="ion-arrow-swap"></i></button>
+
         </form>
     </main>
 

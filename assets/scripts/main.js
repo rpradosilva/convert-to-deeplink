@@ -9,7 +9,7 @@ const URLstructure = {
 
 function newURL() {
   url = document.querySelector("#input-url").value;
-  let URLparameters = specifyURL(url);
+  const URLparameters = specifyURL(url);
   const isValidURL = checkURL(URLparameters.type, URLparameters.group);
   const URLconverted = convertURL(
     URLparameters.type,
@@ -17,7 +17,6 @@ function newURL() {
     URLparameters.id
   );
 
-  navigator.clipboard.writeText(URLconverted);
   output(URLconverted);
 }
 
@@ -52,14 +51,15 @@ function specifyURL(url) {
 function checkURL(type, group) {
   const inputPlaceholder = document.querySelector("#input-url");
   const outputPlaceholder = document.querySelector("#output-url");
+  const buttonActions = document.querySelector("button");
+
   inputPlaceholder.classList.remove("error");
   outputPlaceholder.classList.remove("error");
-  outputPlaceholder.setAttribute(
-    "placeholder",
-    "Digite uma URL de uma FAQ válida"
-  );
+  outputPlaceholder.setAttribute("placeholder", "URL convertida..");
+  buttonActions.style.display = "none";
 
   if (type != undefined && group != "") {
+    buttonActions.style.display = "flex";
     return true;
   } else if ((type, group === null) || group === "") {
     inputPlaceholder.classList.add("error");
@@ -109,13 +109,23 @@ function convertURL(type, group, id) {
 
 function output(URLconverted) {
   const placeholder = document.querySelector("#output-url");
-
   URLconverted ? (placeholder.value = URLconverted) : (placeholder.value = "");
 }
 
 function changeValues() {
   document.querySelector("#input-url").value =
     document.querySelector("#output-url").value;
-
   newURL();
+}
+
+function toClipboard() {
+  const result = document.querySelector("#output-url");
+
+  if (result.value != "") {
+    result.select();
+    result.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    navigator.clipboard.writeText(result.value);
+    alert("Copiado para área de transferência! CTRL + V para colar.");
+  }
 }
