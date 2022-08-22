@@ -128,13 +128,6 @@ input#output-url.error::placeholder {
   font-weight: 700;
 }
 
-label {
-  font-size: 12px;
-  line-height: 1.4;
-  margin: 16px 0 8px 4px;
-  opacity: 0.8;
-}
-
 button {
   background: var(--black);
   border: 0 transparent;
