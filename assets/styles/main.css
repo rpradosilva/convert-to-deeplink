@@ -129,11 +129,14 @@ input#output-url.error::placeholder {
 }
 
 button {
+  display: none;
+}
+
+#button-change {
   background: var(--black);
   border: 0 transparent;
   border-radius: 4px;
   color: var(--white);
-  display: none;
   font-size: 20px;
   font-weight: 700;
   position: absolute;
@@ -143,6 +146,28 @@ button {
   transform: rotate(90deg);
 }
 
-button:hover {
+#button-change:hover {
   cursor: pointer;
+}
+
+#button-change:hover {
+  cursor: pointer;
+}
+
+.action__button {
+  background: #000000;
+  border: 0 transparent;
+  border-radius: 4px;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+  justify-content: center;
+  margin: 16px 0 0 0;
+  opacity: 1;
+  padding: 12px;
+}
+
+.action__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }

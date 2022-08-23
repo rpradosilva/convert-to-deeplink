@@ -1,6 +1,7 @@
-let url;
+let url = document.querySelector("#input-url");
+let result = document.querySelector("#output-url");
 
-const URLstructure = {
+const URLstructures = {
   FAQ: {
     APP: "picpay://picpay/helpcenter/",
     WEB: "https://meajuda.picpay.com",
@@ -8,30 +9,29 @@ const URLstructure = {
 };
 
 function newURL() {
-  url = document.querySelector("#input-url").value;
-  const URLparameters = specifyURL(url);
-  const isValidURL = checkURL(URLparameters.type, URLparameters.group);
-  const URLconverted = convertURL(
+  const URLparameters = specifyURL(url.value);
+  checkURL(URLparameters.type, URLparameters.group);
+  const convertedURL = convertURL(
     URLparameters.type,
     URLparameters.group,
     URLparameters.id
   );
 
-  output(URLconverted);
+  output(convertedURL);
 }
 
 function specifyURL(url) {
   let type, group, id;
 
   if (url != "") {
-    if (url.indexOf(URLstructure.FAQ.WEB) != -1) {
+    if (url.indexOf(URLstructures.FAQ.WEB) != -1) {
       const extractGroup = JSON.stringify(url.match(/\/[a-z]+[a-z]+\/[0-9]/i));
       const extractId = JSON.stringify(url.match(/\/[0-9]+/i));
 
       type = "faqlink";
       group = extractGroup.slice(3, extractGroup.length - 4);
       id = extractId.slice(3, extractId.length - 2);
-    } else if (url.indexOf(URLstructure.FAQ.APP) != -1) {
+    } else if (url.indexOf(URLstructures.FAQ.APP) != -1) {
       const extractGroup = JSON.stringify(url.match(/\/[a-z]+[a-z]+\/[0-9]/i));
       const extractId = JSON.stringify(url.match(/\/[0-9]+/i));
 
@@ -49,25 +49,24 @@ function specifyURL(url) {
 }
 
 function checkURL(type, group) {
-  const inputPlaceholder = document.querySelector("#input-url");
-  const outputPlaceholder = document.querySelector("#output-url");
-  const buttonActions = document.querySelector("button");
+  const buttons = document.querySelectorAll("button");
 
-  inputPlaceholder.classList.remove("error");
-  outputPlaceholder.classList.remove("error");
-  outputPlaceholder.setAttribute("placeholder", "URL convertida..");
-  buttonActions.style.display = "none";
+  url.classList.remove("error");
+  result.classList.remove("error");
+  result.setAttribute("placeholder", "URL convertida..");
+  for (const button of buttons) {
+    button.style.display = "none";
+  }
 
   if (type != undefined && group != "") {
-    buttonActions.style.display = "flex";
+    for (const button of buttons) {
+      button.style.display = "flex";
+    }
     return true;
   } else if ((type, group === null) || group === "") {
-    inputPlaceholder.classList.add("error");
-    outputPlaceholder.classList.add("error");
-    outputPlaceholder.setAttribute(
-      "placeholder",
-      "Digite uma URL de uma FAQ válida"
-    );
+    url.classList.add("error");
+    result.classList.add("error");
+    result.setAttribute("placeholder", "Digite uma URL de uma FAQ válida");
     return false;
   } else {
     return undefined;
@@ -75,57 +74,58 @@ function checkURL(type, group) {
 }
 
 function convertURL(type, group, id) {
-  let URLconverted;
+  let convertedURL;
 
   switch ((type, group)) {
     case "faqlink" && "categories":
-      URLconverted = `${URLstructure.FAQ.APP}category/${id}`;
-      return URLconverted;
+      convertedURL = `${URLstructures.FAQ.APP}category/${id}`;
+      return convertedURL;
 
     case "faqlink" && "sections":
-      URLconverted = `${URLstructure.FAQ.APP}section/${id}`;
-      return URLconverted;
+      convertedURL = `${URLstructures.FAQ.APP}section/${id}`;
+      return convertedURL;
 
     case "faqlink" && "articles":
-      URLconverted = `${URLstructure.FAQ.APP}article/${id}`;
-      return URLconverted;
+      convertedURL = `${URLstructures.FAQ.APP}article/${id}`;
+      return convertedURL;
 
     case "faqdeeplink" && "category":
-      URLconverted = `${URLstructure.FAQ.WEB}/hc/pt-br/categories/${id}`;
-      return URLconverted;
+      convertedURL = `${URLstructures.FAQ.WEB}/hc/pt-br/categories/${id}`;
+      return convertedURL;
 
     case "faqdeeplink" && "section":
-      URLconverted = `${URLstructure.FAQ.WEB}/hc/pt-br/sections/${id}`;
-      return URLconverted;
+      convertedURL = `${URLstructures.FAQ.WEB}/hc/pt-br/sections/${id}`;
+      return convertedURL;
 
     case "faqdeeplink" && "article":
-      URLconverted = `${URLstructure.FAQ.WEB}/hc/pt-br/articles/${id}`;
-      return URLconverted;
+      convertedURL = `${URLstructures.FAQ.WEB}/hc/pt-br/articles/${id}`;
+      return convertedURL;
 
     default:
-      return (URLconverted = null);
+      return (convertedURL = null);
   }
 }
 
-function output(URLconverted) {
-  const placeholder = document.querySelector("#output-url");
-  URLconverted ? (placeholder.value = URLconverted) : (placeholder.value = "");
+function output(convertedURL) {
+  convertedURL ? (result.value = convertedURL) : (result.value = "");
 }
 
 function changeValues() {
-  document.querySelector("#input-url").value =
-    document.querySelector("#output-url").value;
+  url.value = result.value;
   newURL();
 }
 
 function toClipboard() {
-  const result = document.querySelector("#output-url");
-
   if (result.value != "") {
     result.select();
     result.setSelectionRange(0, 99999);
     document.execCommand("copy");
     navigator.clipboard.writeText(result.value);
-    alert("Copiado para área de transferência! CTRL + V para colar.");
+  }
+}
+
+function openURL() {
+  if (result.value != "") {
+    window.open(result.value, "_blank");
   }
 }

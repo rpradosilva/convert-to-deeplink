@@ -20,11 +20,13 @@
                 placeholder="https://meajuda.picpay.com/hc/pt-br/articles/000000" onkeyup="newURL()">
 
             <div class="result">
-                <input type="url" name="link" id="output-url" placeholder="URL convertida.." onclick="toClipboard()">
+                <input type="url" name="link" id="output-url" autocomplete="off" placeholder="URL convertida.."
+                    onclick="toClipboard()" readonly>
                 <i class="ion-ios-copy-outline"></i>
             </div>
 
             <button type="button" id="button-change" onclick="changeValues()"><i class="ion-arrow-swap"></i></button>
+            <button class="action__button" type="button" onclick="openURL()">Abrir URL</button>
 
         </form>
     </main>
