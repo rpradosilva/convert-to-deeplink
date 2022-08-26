@@ -23,9 +23,10 @@ O objetivo desta ferramenta e converter uma url padrão de FAQ `meajuda.picpay.c
 
 ## Como utilizar
 
-1. Insira a URL padrão de clique para converter
-2. Cole em qualquer lugar, o deeplink já estará na área de transferências (clipboard)
-3. Caso queira testar, colo no slack e abra pelo celular
+1. Insira uma URL, link ou deeplink de uma FAQ e veja o resultado no campo abaixo
+2. Você pode copiar o resultado gerado ou abrir a url no navegador
+
+> Importante: para abrir deeplinks é necessário acessar a ferramenta no celular, ter o app do PicPay instalado e logado.
 
 ## Autor
 
