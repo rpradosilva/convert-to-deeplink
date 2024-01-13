@@ -25,8 +25,9 @@ O objetivo desta ferramenta é converter uma url padrão de FAQ para um deeplink
 
 ## Como utilizar
 
-1. Insira uma URL, link ou deeplink **de uma FAQ**
-2. Você pode copiar o resultado gerado ou abrir a url no navegador ou no app (_se estiver no celular com o app do PicPay instalado e logado_).
+1. Acesse o conversor [clicando aqui](https://rpradosilva.github.io/link-to-deeplink/)
+2. Insira uma URL, link ou deeplink **de uma FAQ** - Ex: [`https://meajuda.picpay.com/hc/pt-br/categories/360004131952-Pix`](https://meajuda.picpay.com/hc/pt-br/categories/360004131952-Pix)
+3. Você pode copiar o resultado gerado ou abrir a url no navegador ou no app (_se estiver no celular com o app do PicPay instalado e logado_).
 
 ## Autor
 
